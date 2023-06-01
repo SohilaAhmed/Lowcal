@@ -9,13 +9,17 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
-    let color = colors()
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var circleProgressView: UIView!
+    
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
+        desginTFView(view: headerView)
+        circleView(cView: circleProgressView)
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [UIColor(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1.0).cgColor,
@@ -26,8 +30,10 @@ class HomeViewController: UIViewController {
         
 //        gradientLayer.transform = CATransform3DMakeRotation(CGFloat.pi, 0, 0, 1)
 //        as 180
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
+//        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
+//        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.startPoint = CGPoint(x: 1, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
         //gradientLayer from top to botton
 //        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
 //        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
@@ -36,21 +42,53 @@ class HomeViewController: UIViewController {
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
 
-
-}
-
-
-class colors{
-    var gl: CAGradientLayer!
-    
-    init(){
-//        let color1 = #colorLiteral(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1)
-//        let color2 = #colorLiteral(red: 0.9960784314, green: 0.9960784314, blue: 0.9960784314, alpha: 1)
-//        let color3 = #colorLiteral(red: 0.8980392157, green: 0.9490196078, blue: 0.937254902, alpha: 1)
-        
-        self.gl = CAGradientLayer()
-//        self.gl.colors = [color1, color2, color3]
-        self.gl.startPoint = CGPoint(x: 0.0, y: 0.5)
-        self.gl.endPoint = CGPoint(x: 1.0, y: 0.5)
+    func desginTFView(view: UIView){
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = true
     }
+    
+    func circleView(cView: UIView){
+        var circleLayer = CAShapeLayer()
+        var progressLayer = CAShapeLayer()
+        var startPoint = CGFloat(-Double.pi / 2)
+        var endPoint = CGFloat(3 * Double.pi / 2)
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor(red: 0.7529411765, green: 0.9215686275, blue: 0.8980392157, alpha: 1.0).cgColor,
+                                UIColor(red: 125.0 / 255.0, green: 198.0 / 255.0, blue: 188.0 / 255.0, alpha: 1.0).cgColor]
+        
+        gradientLayer.startPoint = CGPoint(x: 1.0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 0.0, y: 0.5)
+        
+        
+        let circularPath = UIBezierPath(arcCenter: CGPoint(x: cView.frame.size.width / 2.0, y: cView.frame.size.height / 2.0), radius: 60, startAngle: startPoint, endAngle: endPoint, clockwise: true)
+        
+        circleLayer.path = circularPath.cgPath
+   
+        circleLayer.fillColor = UIColor.clear.cgColor
+        circleLayer.lineCap = .round
+        circleLayer.lineWidth = 7.0
+        circleLayer.strokeEnd = 1.0
+        let color = #colorLiteral(red: 0.9490196078, green: 0.9450980392, blue: 0.9450980392, alpha: 1)
+        circleLayer.strokeColor = color.cgColor
+        
+         
+       
+        progressLayer.path = circularPath.cgPath
+       
+        progressLayer.fillColor = UIColor.clear.cgColor
+        progressLayer.lineCap = .round
+        progressLayer.lineWidth = 7.0
+        progressLayer.strokeEnd = 0.7
+        progressLayer.strokeColor = UIColor.green.cgColor
+        
+        gradientLayer.frame = cView.bounds
+        gradientLayer.mask = progressLayer
+        
+        cView.layer.addSublayer(circleLayer)
+        cView.layer.addSublayer(gradientLayer)
+    }
+
 }
+
+
