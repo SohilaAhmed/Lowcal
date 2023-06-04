@@ -25,18 +25,9 @@ class HomeViewController: UIViewController {
         gradientLayer.colors = [UIColor(red: 0.9647058824, green: 0.9647058824, blue: 0.9647058824, alpha: 1.0).cgColor,
                                 UIColor(red: 0.9960784314, green: 0.9960784314, blue: 0.9960784314, alpha: 1.0).cgColor,
                                 UIColor(red: 0.8980392157, green: 0.9490196078, blue: 0.937254902, alpha: 1.0).cgColor]
-        
-//        [UIColor.red.cgColor, UIColor.blue.cgColor, UIColor.green.cgColor]
-        
-//        gradientLayer.transform = CATransform3DMakeRotation(CGFloat.pi, 0, 0, 1)
-//        as 180
-//        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
-//        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
+         
         gradientLayer.startPoint = CGPoint(x: 1, y: 0.0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
-        //gradientLayer from top to botton
-//        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
-//        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0) 
         gradientLayer.frame = view.bounds
 
         view.layer.insertSublayer(gradientLayer, at: 0)
