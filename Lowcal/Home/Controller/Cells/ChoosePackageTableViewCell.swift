@@ -21,8 +21,13 @@ class ChoosePackageTableViewCell: UITableViewCell {
             packagesTableView.dataSource = self
         }
     }
-    
     @IBOutlet weak var tableHeight: NSLayoutConstraint!
+    
+    var selectedPackagePeriodCollection = 0
+    var selectedPackagePeriodClouser: (()->())?
+    var selectedPackageTable: Int?
+    var selectedPackageClouser: (()->())?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

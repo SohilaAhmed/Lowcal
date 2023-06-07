@@ -19,10 +19,21 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(indexPath.section == 0){
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecommendedMealsTableViewCell", for: indexPath) as! RecommendedMealsTableViewCell
+            cell.selectedDayClouser = {
+                self.selectedDay = cell.selectedDaysCollection
+            }
             return cell
         }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChoosePackageTableViewCell", for: indexPath) as! ChoosePackageTableViewCell
+        cell.selectedPackagePeriodClouser = {
+            self.selectedPackagePeriod = cell.selectedPackagePeriodCollection
+        }
+        cell.selectedPackageClouser = {
+            self.selectedPackage = cell.selectedPackageTable
+        }
         cell.tableHeight.constant = (385 * 3) + cell.packagesTableView.rectForFooter(inSection: 0).size.height + cell.packagesTableView.rectForHeader(inSection: 0).size.height
+        
         return cell
     }
     
@@ -36,11 +47,11 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate{
             return nil
         }
     }
-    
-    
+     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
             headerView.textLabel?.textColor = #colorLiteral(red: 0, green: 0, blue: 0.06274509804, alpha: 1)
+            headerView.textLabel?.font.withSize(30)
             headerView.backgroundView = UIView(frame: headerView.bounds)
             headerView.backgroundView?.backgroundColor = .white
         }

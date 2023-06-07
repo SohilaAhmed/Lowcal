@@ -14,14 +14,16 @@ class RecommendedMealsTableViewCell: UITableViewCell {
             daysCollectionView.delegate = self
             daysCollectionView.dataSource = self
         }
-    }
-    
+    } 
     @IBOutlet weak var mealsCollectionView: UICollectionView!{
         didSet{
             mealsCollectionView.delegate = self
             mealsCollectionView.dataSource = self
         }
     }
+    
+    var selectedDaysCollection = 0
+    var selectedDayClouser: (()->())?
     
     override func awakeFromNib() {
         super.awakeFromNib()

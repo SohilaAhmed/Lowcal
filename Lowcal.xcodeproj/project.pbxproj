@@ -84,6 +84,7 @@
 				7BDB1D8C2A275B6000FCB41E /* SceneDelegate.swift */,
 				7BDB1D9E2A277E7300FCB41E /* Home */,
 				7BDB1D902A275B6000FCB41E /* Main.storyboard */,
+				7B60F5032A288D1A009063DD /* TestHeaderViewController.swift */,
 				7BDB1D932A275B7000FCB41E /* Assets.xcassets */,
 				7BDB1D952A275B7000FCB41E /* LaunchScreen.storyboard */,
 				7BDB1D982A275B7000FCB41E /* Info.plist */,
@@ -96,7 +97,6 @@
 			children = (
 				7BDB1DA22A277E9A00FCB41E /* Model */,
 				7BDB1DA02A277E8B00FCB41E /* Controller */,
-				7B60F5032A288D1A009063DD /* TestHeaderViewController.swift */,
 				7BDB1D8E2A275B6000FCB41E /* HomeViewController.swift */,
 				7B60F5072A28E0E0009063DD /* Home+TableDelegate.swift */,
 				7BDB1D9F2A277E8600FCB41E /* View */,

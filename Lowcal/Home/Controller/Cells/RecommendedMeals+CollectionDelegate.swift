@@ -8,6 +8,7 @@
 import UIKit
 
 extension RecommendedMealsTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate{
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if(collectionView == daysCollectionView){
             return 7
@@ -19,11 +20,35 @@ extension RecommendedMealsTableViewCell: UICollectionViewDataSource, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if(collectionView == daysCollectionView){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DaysCollectionViewCell", for: indexPath) as! DaysCollectionViewCell
-            return cell
-            
+            if indexPath.row == selectedDaysCollection {
+                cell.contentView.backgroundColor = #colorLiteral(red: 0.8509803922, green: 0.9294117647, blue: 0.9137254902, alpha: 1)
+            } else {
+                cell.contentView.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9568627451, blue: 0.9568627451, alpha: 1)
+            }
+            return cell 
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MealsCollectionViewCell", for: indexPath) as! MealsCollectionViewCell
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView.cellForItem(at: indexPath) is DaysCollectionViewCell {
+            
+//            if selectedDaysCollection == indexPath.row {
+//                return
+//            }
+//            
+//            let previousIndexPath = IndexPath(row: selectedDaysCollection, section: 0)
+//            let previousCell = collectionView.cellForItem(at: previousIndexPath)
+//            previousCell?.contentView.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9568627451, blue: 0.9568627451, alpha: 1)
+//            
+//            let currentCell = collectionView.cellForItem(at: indexPath)
+//            currentCell?.contentView.backgroundColor = #colorLiteral(red: 0.8509803922, green: 0.9294117647, blue: 0.9137254902, alpha: 1)
+            
+            selectedDaysCollection = indexPath.row
+            self.selectedDayClouser?()
+            daysCollectionView.reloadData()
+        }
     }
     
 }
@@ -42,6 +67,10 @@ extension RecommendedMealsTableViewCell: UICollectionViewDelegateFlowLayout{
     }
      
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 1, left: 15, bottom: 3, right: 15)
+        if(collectionView == daysCollectionView){
+            return UIEdgeInsets(top: 3, left: 30, bottom: 3, right: 15)
+            
+        }
+        return  UIEdgeInsets(top: 3, left: 25, bottom: 3, right: 15)
     }
 }
